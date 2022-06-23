@@ -34,6 +34,8 @@ public class ExcelHelper {
 //            headerStyle.setBorderRight(BorderStyle.valueOf((short) 1));
             headerStyle.setAlignment(HorizontalAlignment.CENTER);
             headerStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+//            headerStyle.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
+//            headerStyle.setFillPattern(FillPatternType.SQUARES);
 
             XSSFFont font = (XSSFFont) workbook.createFont();
             font.setColor(IndexedColors.BLACK.getIndex());

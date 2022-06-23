@@ -40,7 +40,7 @@ public class TutorialController {
 //    }
 
     @GetMapping("/downloadTutorials")
-    public ResponseEntity<Resource> getExcelFile(HttpServletResponse httpResponse){
+    public ResponseEntity<Resource> getExcelFile(HttpServletResponse httpServletResponse) throws IOException {
         List<Tutorial> tutorials = tutorialService.getAllTutorials();
         String fileName = "tutorials.xlsx";
         Path path = Paths.get(fileName);
@@ -50,16 +50,12 @@ public class TutorialController {
                 .path(fileName)
                 .toUriString();
 
-//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd_HH:mm:ss");
-//        LocalDateTime now = LocalDateTime.now();
-//        return ResponseEntity.ok(fileDownloadUri+"_"+dtf.format(now))
-//                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename+ "+fileName)
-//                .contentType(MediaType.parseMediaType("application/vnd.ms_excel"))
-//                .body(file);
-
         ResponseEntity url = responseUrl();
         System.out.println(url);
-        httpResponse.addHeader("Link", "filepath");
+
+        //redirection with path changing reflects in browser
+        //httpServletResponse.sendRedirect(String.valueOf(url));
+        //httpResponse.addHeader("Link:", String.valueOf(url));
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename= "+fileName)
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
